@@ -11,6 +11,8 @@
 		6C0486B12BA9FE280095BA8C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0486B02BA9FE280095BA8C /* ContentView.swift */; };
 		6C0486B32BA9FE2A0095BA8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C0486B22BA9FE2A0095BA8C /* Assets.xcassets */; };
 		6C0486B62BA9FE2A0095BA8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C0486B52BA9FE2A0095BA8C /* Preview Assets.xcassets */; };
+		6C0486BE2BA9FFB90095BA8C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0486BD2BA9FFB90095BA8C /* NetworkManager.swift */; };
+		6C0486C12BAA00270095BA8C /* DBZCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0486C02BAA00270095BA8C /* DBZCharacter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		6C0486B02BA9FE280095BA8C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6C0486B22BA9FE2A0095BA8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C0486B52BA9FE2A0095BA8C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6C0486BD2BA9FFB90095BA8C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6C0486C02BAA00270095BA8C /* DBZCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBZCharacter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 		6C0486AD2BA9FE280095BA8C /* DragonBallApp */ = {
 			isa = PBXGroup;
 			children = (
+				6C0486BF2BAA00210095BA8C /* Model */,
+				6C0486BC2BA9FFB20095BA8C /* Network */,
 				6C0486AE2BA9FE280095BA8C /* DragonBallAppApp.swift */,
 				6C0486B02BA9FE280095BA8C /* ContentView.swift */,
 				6C0486B22BA9FE2A0095BA8C /* Assets.xcassets */,
@@ -65,6 +71,22 @@
 				6C0486B52BA9FE2A0095BA8C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6C0486BC2BA9FFB20095BA8C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6C0486BD2BA9FFB90095BA8C /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6C0486BF2BAA00210095BA8C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6C0486C02BAA00270095BA8C /* DBZCharacter.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +159,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C0486BE2BA9FFB90095BA8C /* NetworkManager.swift in Sources */,
 				6C0486B12BA9FE280095BA8C /* ContentView.swift in Sources */,
+				6C0486C12BAA00270095BA8C /* DBZCharacter.swift in Sources */,
 				6C0486AF2BA9FE280095BA8C /* DragonBallAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
