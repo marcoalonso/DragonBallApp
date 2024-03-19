@@ -22,7 +22,7 @@ struct CharactersView: View {
             ScrollView {
                 LazyVGrid(columns: numberOfColumns, spacing: 10) {
                     ForEach(viewModel.filteredCharacters, id: \.id) { dbChar in
-                        NavigationLink(destination: DBCharacterDetailView(dbChar: dbChar)) {
+                        NavigationLink(destination: DBCharacterDetailView(viewModel: viewModel, dbChar: dbChar)) {
                             DBCharacterCellView(dbCharacter: dbChar, viewModel: viewModel)
                                 .task {
                                     if viewModel.hasReachedEnd(of: dbChar) && !viewModel.isFetching {

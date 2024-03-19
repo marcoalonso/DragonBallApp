@@ -11,7 +11,10 @@ import Combine
 class DBViewModel: ObservableObject {
     @Published var characters: [DBZCharacter] = []
     @Published var filteredCharacters: [DBZCharacter] = []
+    @Published var detailsCharacter: CharacterDetailResponse?
+    
     @Published private(set) var viewState: ViewState?
+    
     
     var isLoading: Bool {
         viewState == .loading
@@ -48,6 +51,19 @@ class DBViewModel: ObservableObject {
             }
         }
         .store(in: &cancellables)
+        
+        
+        service.$characterDetail.sink { [weak self] details in
+            if let detailsC = details {
+                print("Debug: detailsC: \(detailsC)")
+                self?.detailsCharacter = detailsC
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
+    func getDetails(numberCharacter: Int) {
+        service.getDetailOfCharacters(numberCharcater: numberCharacter)
     }
     
     func getListOfCharacters(){
