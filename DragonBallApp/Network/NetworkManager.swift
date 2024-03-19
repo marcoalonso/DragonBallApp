@@ -7,15 +7,16 @@
 
 import UIKit
 
+enum APError: Error {
+    case invalidURL
+    case unableToComplete
+    case invalidResponse
+    case invalidData
+    case decodingError
+}
+
 class NetworkManager: NSObject, ObservableObject {
-    @Published var listCharacters: [DBZCharacter] = []
-    @Published var totalPages: Int = 0
-    @Published var errorMessage: String = ""
-    @Published var characterDetail: CharacterDetailResponse? = nil
-    
     static let shared = NetworkManager()
-    private let cache = NSCache<NSString, UIImage>()
-    
     
     static let baseURL = "https://dragonball-api.com/api/characters?page="
     static let detailCharacterURL = "https://dragonball-api.com/api/characters/"
@@ -23,54 +24,74 @@ class NetworkManager: NSObject, ObservableObject {
     
     private override init() {}
     
-    func getLisOfCharacters(numberPage: Int) {
-        guard let url = URL(string: NetworkManager.baseURL+"\(numberPage)"+"&limit=10" ) else { return }
-        print("Debug: url \(url)")
+    func getLisOfCharacters(numberPage: Int, completed: @escaping (Result<CharacterResponse, APError>) -> Void) {
+        guard let url = URL(string: NetworkManager.baseURL+"\(numberPage)"+"&limit=10" ) else {
+            completed(.failure(.invalidURL))
+            return
+        }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let _ = error { return }
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
             
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
-            print("Debug: response \(response.statusCode)")
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
             
-             guard let data = data else { return }
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
             
             
             do {
                 let decoder = JSONDecoder()
                 let decodedResponse = try decoder.decode(CharacterResponse.self, from: data)
-                self.listCharacters = decodedResponse.items
-                self.totalPages = decodedResponse.meta.totalPages
+                completed(.success(decodedResponse))
                 print("Debug: items \(decodedResponse.items.count)")
             } catch {
                 print("Debug: decoding error \(error.localizedDescription)")
-                self.errorMessage = error.localizedDescription
+                completed(.failure(.decodingError))
             }
         }
         task.resume()
     }
     
-    func getDetailOfCharacters(numberCharcater: Int) {
-        guard let url = URL(string: NetworkManager.detailCharacterURL+"\(numberCharcater)" ) else { return }
-        print("Debug: url \(url)")
+    func getDetailOfCharacters(numberCharcater: Int, completed: @escaping (Result<CharacterDetailResponse, APError>) -> Void ) {
+        guard let url = URL(string: NetworkManager.detailCharacterURL+"\(numberCharcater)" ) else {
+            completed(.failure(.invalidURL))
+            return
+        }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let _ = error { return }
+            if let _ = error {
+                completed(.failure(.unableToComplete))
+                return
+            }
             
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
-            print("Debug: response \(response.statusCode)")
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
             
-             guard let data = data else { return }
+            
+            guard let data = data else {
+                completed(.failure(.invalidData))
+                return
+            }
             
             
             do {
                 let decoder = JSONDecoder()
                 let decodedResponse = try decoder.decode(CharacterDetailResponse.self, from: data)
-                self.characterDetail = decodedResponse
+                completed(.success(decodedResponse))
                 print("Debug: decodedResponse  \(decodedResponse)")
             } catch {
                 print("Debug: decoding error \(error.localizedDescription)")
-                self.errorMessage = error.localizedDescription
+                completed(.failure(.decodingError))
             }
         }
         task.resume()

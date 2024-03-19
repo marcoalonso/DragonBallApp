@@ -12,6 +12,7 @@ class DBViewModel: ObservableObject {
     @Published var characters: [DBZCharacter] = []
     @Published var filteredCharacters: [DBZCharacter] = []
     @Published var detailsCharacter: CharacterDetailResponse?
+    @Published var errorMessage: String = ""
     
     @Published private(set) var viewState: ViewState?
     
@@ -31,45 +32,39 @@ class DBViewModel: ObservableObject {
     private var totalPages: Int?
     
     init () {
-        setupSubscribers()
+        getListOfCharacters()
     }
     
-    func setupSubscribers() {
-        //  Characters
-        service.$listCharacters.sink { [weak self] characters in
-            DispatchQueue.main.async {
-                self?.characters.append(contentsOf: characters)
-                self?.filteredCharacters.append(contentsOf: characters)
-            }
-        }
-        .store(in: &cancellables)
-        
-        //  TotalPages
-        service.$totalPages.sink { [weak self] pages in
-            DispatchQueue.main.async {
-                self?.totalPages = pages
-            }
-        }
-        .store(in: &cancellables)
-        
-        
-        service.$characterDetail.sink { [weak self] details in
-            if let detailsC = details {
-                print("Debug: detailsC: \(detailsC)")
-                self?.detailsCharacter = detailsC
-            }
-        }
-        .store(in: &cancellables)
-    }
     
     func getDetails(numberCharacter: Int) {
-        service.getDetailOfCharacters(numberCharcater: numberCharacter)
+        service.getDetailOfCharacters(numberCharcater: numberCharacter) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let detailsCharacter):
+                    self?.detailsCharacter = detailsCharacter
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
+                }
+            }
+        }
     }
     
     func getListOfCharacters(){
         viewState = .loading
         defer { viewState = .finished }
-        service.getLisOfCharacters(numberPage: page)
+        
+        service.getLisOfCharacters(numberPage: page) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let characters):
+                    self?.characters = characters.items
+                    self?.filteredCharacters = characters.items
+                    self?.totalPages = characters.meta.totalPages
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
+                }
+            }
+        }
     }
     
     func hasReachedEnd(of dbChar: DBZCharacter) -> Bool {
@@ -95,20 +90,40 @@ class DBViewModel: ObservableObject {
         
         page += 1
         
-        service.getLisOfCharacters(numberPage: page)
+        service.getLisOfCharacters(numberPage: page) { [weak self] result in
+            DispatchQueue.main.async {
+                print("Debug: numberPage \(self?.page)")
+                switch result {
+                case .success(let characters):
+                    self?.filteredCharacters.append(contentsOf: characters.items)
+                    self?.characters.append(contentsOf: characters.items)
+                case .failure(let error):
+                    self?.errorMessage = error.localizedDescription
+                }
+            }
+        }
+        
         print("Debug: page \(page)")
     }
     
-    func getColorBasedOnType(type: String) -> Color {
+    func getColorBasedOnRace(type: String) -> Color {
         switch type {
-        case "Army of Frieza":
-            return .blue
-        case "Freelancer":
-            return .green
-        case "Z Fighter":
+        case "Saiyan":
             return .orange
+        case "Human":
+            return .green
+        case "Frieza Race":
+            return .blue
+        case "Android":
+            return .yellow
+        case "Nucleico":
+            return .purple
+        case "Nucleico benigno":
+            return .pink
+        case "Evil":
+            return .red
         default:
-            return Color(.systemGray3)
+            return Color(.systemGray5)
         }
     }
 }

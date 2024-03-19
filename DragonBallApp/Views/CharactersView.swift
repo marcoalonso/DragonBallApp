@@ -33,7 +33,9 @@ struct CharactersView: View {
                     }
                 }
                 .padding()
-               
+                if viewModel.isLoading {
+                    ProgressView()
+                }
             }
             .searchable(text: $characterToSearch, prompt: "Buscar")
             .onChange(of: characterToSearch, { oldValue, newValue in

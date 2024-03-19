@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import WebKit
 
 struct DBCharacterDetailView: View {
     @State private var isAnimating = false
@@ -17,33 +18,47 @@ struct DBCharacterDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
-                ImageCharacterView(url: dbChar.image, width: 140, heigh: 230)
-                    .shadow(radius: 12)
-                    .scaleEffect(isAnimating ? 1.2 : 0.7)
-                    .padding(.top, 40)
+            VStack(spacing: 18.0) {
                 
-                Text(dbChar.name)
-                    .font(.largeTitle)
-                    .foregroundColor(.blue)
+                ZStack {
+                    GifWebView(gifName: dbChar.race == "Saiyan" ? "fondo2" : "fondo")
+                        .frame(height: 400)
+                        .frame(maxWidth: .infinity)
+                    
+                    
+                    VStack {
+                        ImageCharacterView(url: dbChar.image, width: 140, heigh: 230)
+                            .shadow(radius: 12)
+                            .scaleEffect(isAnimating ? 1.2 : 0.7)
+                            .padding(.top, 40)
+                        
+                        Text(dbChar.name)
+                            .font(.largeTitle)
+                            .foregroundColor(Color("TextColor"))
+                    }
+                }
+                
+                
                 
                 
                 Text(dbChar.description)
                     .font(.footnote)
-                    .padding()
                 
                 if let transformation = viewModel.detailsCharacter?.transformations {
-                    Text("Transformaciones")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.red)
+                    if !transformation.isEmpty {
+                        Text("Transformaciones")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.red)
+                    }
+                    
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12.0) {
                             ForEach(transformation) { transformation in
                                 VStack {
                                     ImageCharacterView(url: transformation.image, width: 70, heigh: 120)
-                                        
+                                    
                                     Text(transformation.name)
                                         .lineLimit(1)
                                         .font(.footnote)
@@ -81,9 +96,8 @@ struct DBCharacterDetailView: View {
                     Text(dbChar.affiliation)
                         .font(.subheadline)
                 }
-                .padding(.top, 10)
-                
             }
+            .padding()
             .onAppear {
                 viewModel.getDetails(numberCharacter: dbChar.id)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -91,8 +105,9 @@ struct DBCharacterDetailView: View {
                         isAnimating = true
                     }
                 }
+            }
         }
-        }
+        
     }
 }
 

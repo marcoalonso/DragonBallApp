@@ -14,10 +14,74 @@
             filePath = "DragonBallApp/Network/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "getLisOfCharacters(numberPage:)"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "getLisOfCharacters(numberPage:completed:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9BCFB500-6F60-49FB-8344-B580AADFF7F1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DragonBallApp/ViewModel/DBViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "hasReachedEnd(of:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0D63C4B8-1F29-49AD-857B-904765E1C1FA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DragonBallApp/ViewModel/DBViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "ferchNextSetOfCharacters()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0D63C4B8-1F29-49AD-857B-904765E1C1FA - 7874c4bb8a6cd95e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for DragonBallApp.DBViewModel.ferchNextSetOfCharacters() async -&gt; ()"
+                  moduleName = "DragonBallApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcoalonso/Desktop/SWIFT%20PROYECTS/SWIFTUI/DragonBallApp/DragonBallApp/ViewModel/DBViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "488">
+               </Location>
+               <Location
+                  uuid = "0D63C4B8-1F29-49AD-857B-904765E1C1FA - 7874c4bb8a6cd8b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for DragonBallApp.DBViewModel.ferchNextSetOfCharacters() async -&gt; ()"
+                  moduleName = "DragonBallApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marcoalonso/Desktop/SWIFT%20PROYECTS/SWIFTUI/DragonBallApp/DragonBallApp/ViewModel/DBViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "148">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

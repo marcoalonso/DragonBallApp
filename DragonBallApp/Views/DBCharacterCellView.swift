@@ -15,7 +15,7 @@ struct DBCharacterCellView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(viewModel.getColorBasedOnType(type: dbCharacter.affiliation))
+                .foregroundColor(viewModel.getColorBasedOnRace(type: dbCharacter.race))
                 .cornerRadius(25)
             
             VStack {
