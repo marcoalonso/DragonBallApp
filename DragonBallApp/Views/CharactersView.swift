@@ -10,6 +10,7 @@ import Kingfisher
 
 struct CharactersView: View {
     @StateObject var viewModel = DBViewModel()
+    @State private var characterToSearch = ""
     
     private let numberOfColumns = [
         GridItem(.flexible()),
@@ -20,15 +21,26 @@ struct CharactersView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: numberOfColumns, spacing: 10) {
-                    ForEach(viewModel.characters, id: \.id) { dbChar in
+                    ForEach(viewModel.filteredCharacters, id: \.id) { dbChar in
                         NavigationLink(destination: DBCharacterDetailView(dbChar: dbChar)) {
                             DBCharacterCellView(dbCharacter: dbChar, viewModel: viewModel)
+                                .task {
+                                    if viewModel.hasReachedEnd(of: dbChar) && !viewModel.isFetching {
+                                        await viewModel.ferchNextSetOfCharacters()
+                                    }
+                                }
                         }
                     }
                 }
                 .padding()
                
             }
+            .searchable(text: $characterToSearch, prompt: "Buscar")
+            .onChange(of: characterToSearch, { oldValue, newValue in
+                withAnimation {
+                    viewModel.filerCharacter(name: newValue)
+                }
+            })
             .onAppear {
                 withAnimation {
                     viewModel.getListOfCharacters()

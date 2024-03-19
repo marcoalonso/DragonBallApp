@@ -50,7 +50,7 @@ struct DBCharacterDetailView: View {
                 
                 Text("-")
                 
-                Text("\(dbChar.affiliation.rawValue)")
+                Text(dbChar.affiliation)
                     .font(.subheadline)
             }
             

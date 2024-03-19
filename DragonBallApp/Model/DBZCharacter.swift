@@ -19,15 +19,11 @@ struct DBZCharacter: Codable, Identifiable {
     let gender: Gender
     let description: String
     let image: String
-    let affiliation: Affiliation
+    let affiliation: String
     
 }
 
-enum Affiliation: String, Codable {
-    case armyOfFrieza = "Army of Frieza"
-    case freelancer = "Freelancer"
-    case zFighter = "Z Fighter"
-}
+
 
 enum Gender: String, Codable {
     case female = "Female"

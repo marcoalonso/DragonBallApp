@@ -9,64 +9,41 @@ import UIKit
 
 class NetworkManager: NSObject, ObservableObject {
     @Published var listCharacters: [DBZCharacter] = []
+    @Published var totalPages: Int = 0
     @Published var errorMessage: String = ""
     
     static let shared = NetworkManager()
     private let cache = NSCache<NSString, UIImage>()
     
     
-    static let baseURL = "https://dragonball-api.com/api/characters"
+    static let baseURL = "https://dragonball-api.com/api/characters?page="
     
     private override init() {}
     
-    func getLisOfCharacters() {
-        guard let url = URL(string: NetworkManager.baseURL ) else { return }
+    func getLisOfCharacters(numberPage: Int) {
+        guard let url = URL(string: NetworkManager.baseURL+"\(numberPage)"+"&limit=10" ) else { return }
+        print("Debug: url \(url)")
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let _ = error { return }
             
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { return }
+            print("Debug: response \(response.statusCode)")
             
-            guard let data = data else { return }
+             guard let data = data else { return }
+            
             
             do {
                 let decoder = JSONDecoder()
                 let decodedResponse = try decoder.decode(CharacterResponse.self, from: data)
                 self.listCharacters = decodedResponse.items
-                print("Debug: listCharacters \(self.listCharacters)")
+                self.totalPages = decodedResponse.meta.totalPages
+                print("Debug: items \(decodedResponse.items.count)")
             } catch {
                 print("Debug: decoding error \(error.localizedDescription)")
                 self.errorMessage = error.localizedDescription
             }
         }
-        task.resume()
-    }
-    
-    
-    func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void) {
-        
-        let cacheKey = NSString(string: urlString)
-        
-        if let image = cache.object(forKey: cacheKey) {
-            completed(image)
-            return
-        }
-        
-        guard let url = URL(string: urlString) else {
-            completed(nil)
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, let image = UIImage(data: data) else {
-                completed(nil)
-                return
-            }
-            
-            self.cache.setObject(image, forKey: cacheKey)
-            completed(image)
-        }
-        
         task.resume()
     }
 }
