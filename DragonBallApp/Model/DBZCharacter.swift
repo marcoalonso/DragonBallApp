@@ -13,7 +13,7 @@ struct CharacterResponse: Codable {
 }
 
 // MARK: - Item
-struct DBZCharacter: Codable {
+struct DBZCharacter: Codable, Identifiable {
     let id: Int
     let name, ki, maxKi, race: String
     let gender: Gender
