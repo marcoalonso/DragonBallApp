@@ -8,7 +8,6 @@
 import UIKit
 
 class NetworkManager: NSObject, ObservableObject {
-    ///To use combine we need implement this var and adopt ObservableObject
     @Published var listCharacters: [DBZCharacter] = []
     @Published var errorMessage: String = ""
     
@@ -20,7 +19,6 @@ class NetworkManager: NSObject, ObservableObject {
     
     private override init() {}
     
-    ///Using combine instead of closure
     func getLisOfCharacters() {
         guard let url = URL(string: NetworkManager.baseURL ) else { return }
         
