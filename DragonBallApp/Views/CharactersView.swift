@@ -6,28 +6,35 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CharactersView: View {
     @StateObject var viewModel = DBViewModel()
     
+    private let numberOfColumns = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+    ]
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                ForEach(viewModel.characters, id: \.id) { dbChar in
-                    VStack {
-                        Text(dbChar.name)
-                            .font(.title)
-                            .foregroundColor(.red)
-                        
-                        Text("Ki: \(dbChar.ki)")
-                            .font(.title3)
-                            .foregroundColor(.gray)
+                LazyVGrid(columns: numberOfColumns, spacing: 10) {
+                    ForEach(viewModel.characters, id: \.id) { dbChar in
+                        NavigationLink(destination: DBCharacterDetailView(dbChar: dbChar)) {
+                            DBCharacterCellView(dbCharacter: dbChar, viewModel: viewModel)
+                        }
                     }
                 }
+                .padding()
+               
             }
             .onAppear {
+                withAnimation {
                     viewModel.getListOfCharacters()
+                }
             }
+            .navigationBarTitle("Dragon Ball Z", displayMode: .inline)
         }
     }
 }

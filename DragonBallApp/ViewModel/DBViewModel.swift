@@ -30,4 +30,15 @@ class DBViewModel: ObservableObject {
     func getListOfCharacters(){
         service.getLisOfCharacters()
     }
+    
+    func getColorBasedOnType(type: Affiliation) -> Color {
+        switch type {
+        case .armyOfFrieza:
+            return .orange
+        case .freelancer:
+            return .green
+        case .zFighter:
+            return .red
+        }
+    }
 }
