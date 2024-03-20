@@ -12,6 +12,8 @@ import WebKit
 struct DBCharacterDetailView: View {
     @State private var isAnimating = false
     @StateObject var viewModel: DBViewModel
+    @State private var showImageTransformation = false
+    @State private var imageToShow = ""
     
     let dbChar: DBZCharacter
     
@@ -63,6 +65,10 @@ struct DBCharacterDetailView: View {
                                         .lineLimit(1)
                                         .font(.footnote)
                                 }
+                                .onTapGesture(perform: {
+                                    imageToShow = transformation.image
+                                    showImageTransformation = true
+                                })
                                 .frame(width: 100)
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 10)
@@ -97,6 +103,9 @@ struct DBCharacterDetailView: View {
                         .font(.subheadline)
                 }
             }
+            .sheet(isPresented: $showImageTransformation, content: {
+                ImageTransformationView(urlImage: imageToShow)
+            })
             .padding()
             .onAppear {
                 viewModel.getDetails(numberCharacter: dbChar.id)

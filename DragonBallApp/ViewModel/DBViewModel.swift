@@ -92,10 +92,9 @@ class DBViewModel: ObservableObject {
         
         service.getLisOfCharacters(numberPage: page) { [weak self] result in
             DispatchQueue.main.async {
-                print("Debug: numberPage \(self?.page)")
                 switch result {
                 case .success(let characters):
-                    self?.filteredCharacters.append(contentsOf: characters.items)
+                     self?.filteredCharacters.append(contentsOf: characters.items)
                     self?.characters.append(contentsOf: characters.items)
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
@@ -103,7 +102,6 @@ class DBViewModel: ObservableObject {
             }
         }
         
-        print("Debug: page \(page)")
     }
     
     func getColorBasedOnRace(type: String) -> Color {

@@ -51,7 +51,6 @@ class NetworkManager: NSObject, ObservableObject {
                 let decoder = JSONDecoder()
                 let decodedResponse = try decoder.decode(CharacterResponse.self, from: data)
                 completed(.success(decodedResponse))
-                print("Debug: items \(decodedResponse.items.count)")
             } catch {
                 print("Debug: decoding error \(error.localizedDescription)")
                 completed(.failure(.decodingError))
@@ -88,7 +87,6 @@ class NetworkManager: NSObject, ObservableObject {
                 let decoder = JSONDecoder()
                 let decodedResponse = try decoder.decode(CharacterDetailResponse.self, from: data)
                 completed(.success(decodedResponse))
-                print("Debug: decodedResponse  \(decodedResponse)")
             } catch {
                 print("Debug: decoding error \(error.localizedDescription)")
                 completed(.failure(.decodingError))

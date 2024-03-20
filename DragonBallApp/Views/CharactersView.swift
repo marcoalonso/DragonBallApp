@@ -27,6 +27,7 @@ struct CharactersView: View {
                                 .task {
                                     if viewModel.hasReachedEnd(of: dbChar) && !viewModel.isFetching {
                                         await viewModel.ferchNextSetOfCharacters()
+                                        print("Debug: ferchNextSetOfCharacters")
                                     }
                                 }
                         }
@@ -39,15 +40,11 @@ struct CharactersView: View {
             }
             .searchable(text: $characterToSearch, prompt: "Buscar")
             .onChange(of: characterToSearch, { oldValue, newValue in
+                print("Debug: newValue \(newValue)")
                 withAnimation {
                     viewModel.filerCharacter(name: newValue)
                 }
             })
-            .onAppear {
-                withAnimation {
-                    viewModel.getListOfCharacters()
-                }
-            }
             .navigationBarTitle("Dragon Ball Z", displayMode: .inline)
         }
     }
