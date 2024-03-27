@@ -22,8 +22,6 @@ class NetworkManager: NSObject, ObservableObject {
     static let detailCharacterURL = "https://dragonball-api.com/api/characters/"
 
     
-    private override init() {}
-    
     func getLisOfCharacters(numberPage: Int, completed: @escaping (Result<CharacterResponse, APError>) -> Void) {
         guard let url = URL(string: NetworkManager.baseURL+"\(numberPage)"+"&limit=10" ) else {
             completed(.failure(.invalidURL))

@@ -104,7 +104,7 @@ struct DBCharacterDetailView: View {
                 }
             }
             .sheet(isPresented: $showImageTransformation, content: {
-                ImageTransformationView(urlImage: imageToShow)
+                ImageTransformationView(urlImage: $imageToShow)
             })
             .padding()
             .onAppear {

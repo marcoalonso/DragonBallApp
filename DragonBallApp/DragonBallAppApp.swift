@@ -11,7 +11,7 @@ import SwiftUI
 struct DragonBallAppApp: App {
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            CharactersView()
         }
     }
 }

@@ -25,6 +25,8 @@
 		6C0486DA2BAA4F080095BA8C /* fondo2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6C0486D92BAA4F080095BA8C /* fondo2.gif */; };
 		6C0486DC2BAA59C30095BA8C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0486DB2BAA59C30095BA8C /* MainTabView.swift */; };
 		6C0486DE2BAA6BCB0095BA8C /* ImageTransformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0486DD2BAA6BCB0095BA8C /* ImageTransformationView.swift */; };
+		6CEF0BB82BB3E1E8008D2247 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF0BB72BB3E1E8008D2247 /* ActivityView.swift */; };
+		6CEF0BBA2BB3E912008D2247 /* ImageTransformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEF0BB92BB3E912008D2247 /* ImageTransformationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		6C0486D92BAA4F080095BA8C /* fondo2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fondo2.gif; sourceTree = "<group>"; };
 		6C0486DB2BAA59C30095BA8C /* MainTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		6C0486DD2BAA6BCB0095BA8C /* ImageTransformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformationView.swift; sourceTree = "<group>"; };
+		6CEF0BB72BB3E1E8008D2247 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		6CEF0BB92BB3E912008D2247 /* ImageTransformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTransformationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				6C0486C32BAA01D40095BA8C /* DBViewModel.swift */,
+				6CEF0BB92BB3E912008D2247 /* ImageTransformationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 		6C0486C52BAA02CF0095BA8C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6CEF0BB72BB3E1E8008D2247 /* ActivityView.swift */,
 				6C0486DB2BAA59C30095BA8C /* MainTabView.swift */,
 				6C0486C62BAA02E60095BA8C /* CharactersView.swift */,
 				6C0486CB2BAA07530095BA8C /* DBCharacterCellView.swift */,
@@ -227,8 +233,10 @@
 				6C0486C12BAA00270095BA8C /* DBZCharacter.swift in Sources */,
 				6C0486CE2BAA077E0095BA8C /* MockData.swift in Sources */,
 				6C0486D42BAA21640095BA8C /* CharacterDetailResponse.swift in Sources */,
+				6CEF0BBA2BB3E912008D2247 /* ImageTransformationViewModel.swift in Sources */,
 				6C0486AF2BA9FE280095BA8C /* DragonBallAppApp.swift in Sources */,
 				6C0486D82BAA4C970095BA8C /* GifWebView.swift in Sources */,
+				6CEF0BB82BB3E1E8008D2247 /* ActivityView.swift in Sources */,
 				6C0486D02BAA0B450095BA8C /* DBCharacterDetailView.swift in Sources */,
 				6C0486DC2BAA59C30095BA8C /* MainTabView.swift in Sources */,
 			);
@@ -367,6 +375,7 @@
 				DEVELOPMENT_TEAM = V5U53J8M62;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access to your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -396,6 +405,7 @@
 				DEVELOPMENT_TEAM = V5U53J8M62;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access to your library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
